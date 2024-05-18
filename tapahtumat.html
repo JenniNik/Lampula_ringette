@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fi">
+    
+<head>
+    <meta charset="UTF-8">
+    <link href="tyylit.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    ><div class="kuva1">
+        <img src="ringettepieni.png" alt="etusivunkuva"> 
+    </div>
+    <title>Lampulan Ringette Ry</title>
+    
+    
+       
+    <style>
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color:burlywood(112, 106, 106);
+                }
+    
+                li {
+        float: none;
+        }
+
+    
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                }
+    
+            li a:hover {
+                background-color: #111;
+                }
+        
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+            }
+            .datepicker-container, .event-container {
+                margin: 20px 0;
+            }
+        
+        
+    
+    .event-list {
+        margin-top: 20px;
+        list-style-type: none;
+        padding: 0;
+    }
+    .event-list li {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+
+    </style>
+    </head>
+                    <header>
+                        <h1>Lampulan Ringette ry</h1>
+                    </header>
+    <body>
+
+        <nav>
+            <ul>
+                    <li><a href="Lampulaetusivu.html">Etusivu</a></li>
+                    <li><a href="ringette.html">Mitä on Ringette?</a></li>
+                    <li><a href="ryhmat.html">Ringeten historiaa</a></li>
+                    <li><a href="kuvia.html">Tapahtumakuvia</a></li>
+                    <li><a href="tapahtumat.html">Tapahtumakalenteri</a></li>
+                    <li><a href="yhteystiedot.html">Yhteystiedot ja sponsorit</a></li>
+                    
+            </ul>
+        </nav>
+    
+    <h2><b>Lisää uusi tapahtuma:</b></h2>
+    
+    <div class="datepicker-container">
+        <input type="text" id="datepicker" placeholder="Valitse päivämäärä">
+    </div>
+    
+    <div class="event-container">
+        <input type="text" id="eventname" placeholder="Tapahtuman nimi">
+        <button onclick="addEvent()">Lisää tapahtuma</button>
+    </div>
+    
+    <h2>Tapahtumat</h2>
+    <ul id="eventlist" class="event-list"></ul>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            flatpickr("#datepicker", {
+                dateFormat: "d.m.Y",
+                "locale": {
+                    "firstDayOfWeek": 1,
+                    "weekdays": {
+                        "shorthand": ["Su", "Ma", "Ti", "Ke", "To", "Pe", "La"],
+                        "longhand": ["Sunnuntai", "Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai", "Lauantai"]
+                    },
+                    "months": {
+                        "shorthand": ["Tam", "Hel", "Maa", "Huh", "Tou", "Kes", "Hei", "Elo", "Syy", "Lok", "Mar", "Jou"],
+                        "longhand": ["Tammikuu", "Helmikuu", "Maaliskuu", "Huhtikuu", "Toukokuu", "Kesäkuu", "Heinäkuu", "Elokuu", "Syyskuu", "Lokakuu", "Marraskuu", "Joulukuu"]
+                    }
+                }
+            });
+    
+            loadEvents();
+        });
+    
+        function addEvent() {
+        const date = document.getElementById('datepicker').value;
+        const eventName = document.getElementById('eventname').value;
+
+        if (date && eventName) {
+            const eventList = document.getElementById('eventlist');
+            const newEvent = document.createElement('li');
+            newEvent.textContent = `${date}: ${eventName}`;
+            eventList.appendChild(newEvent);
+
+            saveEvent(date, eventName);
+
+            document.getElementById('datepicker').value = '';
+            document.getElementById('eventname').value = '';
+        } else {
+            alert('Valitse päivämäärä ja anna tapahtuman nimi.');
+        }
+    }
+
+    function saveEvent(date, eventName) {
+        let events = JSON.parse(localStorage.getItem('events')) || [];
+        events.push({ date, eventName });
+        localStorage.setItem('events', JSON.stringify(events));
+    }
+
+    function loadEvents() {
+        let events = JSON.parse(localStorage.getItem('events')) || [];
+        const eventList = document.getElementById('eventlist');
+        events.forEach(event => {
+            const newEvent = document.createElement('li');
+            newEvent.textContent = `${event.date}: ${event.eventName}`;
+            eventList.appendChild(newEvent);
+        });
+    }
+    
+    </script>
+    
+    </body>
+    </html>
+    

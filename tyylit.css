@@ -1,0 +1,32 @@
+h1 {
+    background-color:rgb(221, 161, 245);
+    font-family:Verdana, Geneva, Tahoma, sans-serif, Helvetica, sans-serif, 'Arial Narrow', Arial, sans-serif, Helvetica, sans-serif;
+    color:black; 
+    padding: 0em;
+    margin: 0%;
+    font-size: 80px;
+   
+    
+}
+
+h2 {
+    font-family:Arial, Helvetica, sans-serif, Helvetica, sans-serif;
+}
+p{
+    font-family:Arial, Helvetica, sans-serif, Helvetica, sans-serif;
+}
+ul{
+    
+    background-color:rgb(102, 240, 233);
+    font-family: Arial, sans-serif;
+    color:black;
+    padding:1em;
+    margin:0%;     
+    
+}
+
+
+.justified-text {
+text-align: justify;
+        }
+   
